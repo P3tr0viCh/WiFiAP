@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Точка доступа Wi-Fi</string>
+
+    <string name="wifi_ap_failed">Точка доступа Wi-Fi отсутствует</string>
+
+    <string name="wifi_ap_enabled">Точка доступа Wi-Fi включена</string>
+    <string name="wifi_ap_disabled">Точка доступа Wi-Fi выключена</string>
+
+    <string name="wifi_ap_enabling">Точка доступа Wi-Fi включается</string>
+    <string name="wifi_ap_disabling">Точка доступа Wi-Fi выключается</string>
+</resources>

@@ -1,0 +1,71 @@
+apply plugin: 'com.android.application'
+
+Properties props = new Properties()
+props.load(new FileInputStream(file("c:\\Android\\Keystore\\ru.p3tr0vich.wifiap.properties")))
+
+android {
+    signingConfigs {
+        debug {
+            keyAlias 'ru.p3tr0vich.wifiap'
+            keyPassword props['keyPassword']
+            storeFile file(props['storeFile'])
+            storePassword props['storePassword']
+        }
+        release {
+            keyAlias 'ru.p3tr0vich.wifiap'
+            keyPassword props['keyPassword']
+            storeFile file(props['storeFile'])
+            storePassword props['storePassword']
+        }
+    }
+
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        applicationId "ru.p3tr0vich.wifiap"
+        minSdkVersion 17
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //noinspection GroovyAssignabilityCheck
+            signingConfig signingConfigs.debug
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //noinspection GroovyAssignabilityCheck
+            signingConfig signingConfigs.release
+
+            applicationVariants.all { variant ->
+                appendVersionName(variant, defaultConfig)
+            }
+        }
+    }
+}
+
+@SuppressWarnings("GroovyAssignabilityCheck")
+def appendVersionName(variant, defaultConfig) {
+    variant.outputs.each { output ->
+        if (output.zipAlign) {
+            def file = output.outputFile
+            def fileName = file.name.replace("app-release.apk", defaultConfig.applicationId + "-" +
+                    defaultConfig.versionName + "-release.apk")
+            output.outputFile = new File(file.parent, fileName)
+        }
+
+        def file = output.packageApplication.outputFile
+        def fileName = file.name.replace("app-release.apk", defaultConfig.applicationId + "-" +
+                defaultConfig.versionName + "-release.apk")
+        output.packageApplication.outputFile = new File(file.parent, fileName)
+    }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:23.0.1'
+}
