@@ -57,7 +57,8 @@ public class ActivityMain extends Activity {
 
                     wifiEnabled = PreferenceManager.getDefaultSharedPreferences(this)
                             .getBoolean(WIFI_ENABLED_KEY, false);
-                    wifiManagerHelper.setWifiEnabled(wifiEnabled);
+                    if (wifiEnabled)
+                        wifiManagerHelper.setWifiEnabled(true);
             }
         } catch (Exception e) {
             Log.d(LOG_TAG, e.toString() + ": " + e.getCause().toString());
