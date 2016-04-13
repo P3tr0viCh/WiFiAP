@@ -20,7 +20,7 @@ android {
     }
 
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "24.0.0 rc2"
 
     defaultConfig {
         applicationId "ru.p3tr0vich.wifiap"

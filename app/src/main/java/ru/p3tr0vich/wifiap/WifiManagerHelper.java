@@ -45,7 +45,7 @@ class WifiManagerHelper {
         return (Integer) getWifiApStateMethod.invoke(mWifiManager);
     }
 
-    public boolean isWifiEnabled()  {
+    public boolean isWifiEnabled() {
         return mWifiManager.isWifiEnabled();
     }
 
